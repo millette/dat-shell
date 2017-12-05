@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "license": "AGPL-3.0",
   "main": "index.js",
-  "bin": [
-    "cli.js"
-  ],
+  "bin": "cli.js",
   "engines": {
     "node": ">=8.9.1"
   },
