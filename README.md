@@ -26,7 +26,7 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 
 ## TODO
 * Colors
-* Improve cd handling
+* Improve cd handling (limit to actual directories)
 * Improve ls handling (arguments, long version, etc.)
 * Improve args quoting (à la bash)
 * Make all commands async (promises)
@@ -36,11 +36,13 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 * Add cat command
 * Add more command
 * Add tail command
+* Add tree command
 * Unit tests, travis, coveralls
 * Gemnasium batch
 * Enable usage as: dat-shell KEY ls (non-interactive)
 * Support plugins
 * Improve help, add command descriptions
+* Add custom command completion
 
 ## License
 AGPL-v3 © 2017 [Robin Millette](http://robin.millette.info)

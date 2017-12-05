@@ -8,7 +8,7 @@ const glob = require('glob')
 // core
 const repl = require('repl')
 
-const doit = (key) => new Promise((resolve, reject) => {
+const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
   const doG = (dat, stats, g) => {
     const st = stats.get()
@@ -48,11 +48,9 @@ class MakeRepl {
     if (key) {
       if (this._datKey !== key) {
         if (this._datKey && this._dat && this._dat.close) {
-          // close this._datKey
           this._dat.close()
         }
-        // open key
-        doit(key)
+        openDat(key)
           .then((dat) => {
             this._dat = dat
             this._datKey = dat.key.toString('hex')
@@ -60,7 +58,6 @@ class MakeRepl {
           })
       }
     } else if (this._datKey && this._dat && this._dat.close) {
-      // close this._datKey
       this._dat.close()
       this._datKey = undefined
       this._datKeyProvided = undefined
@@ -75,8 +72,20 @@ class MakeRepl {
     const asyncs = ['ls']
 
     const commands = {
-      '.help': () => {},
-      help: (args) => `Available commands: ${Object.keys(commands).join(', ')}`,
+      '.help': {},
+      help: (args) => {
+        const lines = ['Available commands:']
+        let r
+        let str
+        for (r in commands) {
+          str = r
+          if (commands[r].help) {
+            str += `: ${commands[r].help}`
+          }
+          lines.push(str)
+        }
+        return lines
+      },
       ls: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         glob('*', { mark: true, cwd: this.cwd, fs: this._dat.archive }, (err, files) => {
@@ -113,6 +122,17 @@ class MakeRepl {
       exit: (args) => process.exit((args && parseInt(args[0], 10)) || 0)
     }
 
+    commands['.help'].help = 'Internal repl commands.'
+    commands.help.help = 'List of commands and their descriptions.'
+    commands.ls.help = 'List files.'
+    commands.cd.help = 'Change directory.'
+    commands.sl.help = 'Train yourself to avoid typos.'
+    commands.pwd.help = 'Output current working directory.'
+    commands.dat.help = 'dat -c to close; dat <KEY> to open; dat to output current key.'
+    commands.state.help = 'Output current state.'
+    commands.version.help = 'Current dat-shell version.'
+    commands.exit.help = 'Exit dat-shell (or CTRL-D).'
+
     this._options = {
       prompt: makePrompt(),
       ignoreUndefined: true,
@@ -133,7 +153,7 @@ class MakeRepl {
     }
 
     console.log(commands.state().join('\n'))
-    console.log(commands.help())
+    console.log(commands.help().join('\n'))
   }
 
   get cwd () { return this._cwd || '/' }
