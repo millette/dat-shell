@@ -4,6 +4,8 @@
 [![Dependency Status](https://gemnasium.com/badges/github.com/millette/dat-shell.svg)](https://gemnasium.com/github.com/millette/dat-shell)
 > Dat shell. Open a remote dat and explore with cd, ls, etc.
 
+dat-shell is part of the [dat][] Peer-to-Peer universe. It's useful to explore remote dat by their key without having to download it. Think of it as bash for dats, letting you ```cd```, ```ls``` and ```cp``` at will.
+
 ## Install
 ```
 $ npm install --global dat-shell
@@ -28,10 +30,10 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 * Colors
 * Improve cd handling (limit to actual directories)
 * Improve ls handling (arguments, long version, etc.)
-* Improve args quoting (à la bash)
+* Improve args quoting (*à la* bash)
 * Make all commands async (promises)
 * Improve user responses
-* Make prompt configurable (à la bash)
+* Make prompt configurable (*à la* bash)
 * Add cp command
 * Add cat command
 * Add more command
@@ -43,8 +45,11 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 * Support plugins
 * Improve help, add command descriptions
 * Add custom command completion
+* Add debugging options and output
+* Improve error messages
 
 ## License
 AGPL-v3 © 2017 [Robin Millette](http://robin.millette.info)
 
 [update-notifier]: <https://github.com/yeoman/update-notifier>
+[dat]: <https://datproject.org/>
