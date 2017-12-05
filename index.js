@@ -58,7 +58,6 @@ class MakeRepl {
             this._datKey = dat.key.toString('hex')
             if (this._datKey !== key) { this._datKeyProvided = key }
           })
-
       }
     } else if (this._datKey && this._dat && this._dat.close) {
       // close this._datKey
