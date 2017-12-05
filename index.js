@@ -79,7 +79,7 @@ class MakeRepl {
       '.help': () => {},
       help: (args) => `Available commands: ${Object.keys(commands).join(', ')}`,
       ls: (args) => new Promise((resolve, reject) => {
-        if (!this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
+        if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         glob('*', { mark: true, cwd: this.cwd, fs: this._dat.archive }, (err, files) => {
           if (err) { return reject(err) }
           Promise.all(files.filter(Boolean))

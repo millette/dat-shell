@@ -24,6 +24,21 @@ $ npm install --global dat-shell
 $ dat-shell <dat-key> # dat-key is optionnal
 ```
 
+## TODO
+* Colors
+* Improve cd handling
+* Improve ls handling (arguments, long version, etc.)
+* Improve args quoting (à la bash)
+* Make all commands async (promises)
+* Improve user responses
+* Make prompt configurable (à la bash)
+* Add cp command
+* Unit tests, travis, coveralls
+* Gemnasium batch
+* Enable usage as: dat-shell KEY ls (non-interactive)
+* Support plugins
+* Improve help, add command descriptions
+
 ## License
 AGPL-v3 © 2017 [Robin Millette](http://robin.millette.info)
 
