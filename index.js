@@ -133,8 +133,8 @@ class MakeRepl {
       }
     }
 
-    commands.state()
     console.log(commands.state().join('\n'))
+    console.log(commands.help())
   }
 
   get cwd () { return this._cwd || '/' }
