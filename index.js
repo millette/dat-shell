@@ -48,14 +48,13 @@ class MakeRepl {
   set datKey (key) {
     if (key) {
       if (this._datKey !== key) {
-        if (this._datKey && this._dat && this._dat.close) {
-          this._dat.close()
-        }
+        if (this._datKey && this._dat && this._dat.close) { this._dat.close() }
         openDat(key)
           .then((dat) => {
             this._dat = dat
             this._datKey = dat.key.toString('hex')
             if (this._datKey !== key) { this._datKeyProvided = key }
+            this.cwd = '/'
           })
       }
     } else if (this._datKey && this._dat && this._dat.close) {
@@ -65,23 +64,24 @@ class MakeRepl {
     }
   }
 
+  _makePrompt () { return `dat-shell ${this.cwd} $ ` }
+
   constructor (opts) {
     Object.assign(this, opts)
     if (opts.datKey) { this._datKeyProvided = opts.datKey }
-    const makePrompt = () => `dat-shell ${this.cwd} $ `
 
     const asyncs = ['ls']
 
-    const commands = {
+    this._commands = {
       '.help': {},
       help: (args) => {
-        const lines = ['Available commands:']
+        const lines = ['Available this._commands:']
         let r
         let str
-        for (r in commands) {
+        for (r in this._commands) {
           str = r
-          if (commands[r].help) {
-            str += `: ${commands[r].help}`
+          if (this._commands[r].help) {
+            str += `: ${this._commands[r].help}`
           }
           lines.push(str)
         }
@@ -90,7 +90,6 @@ class MakeRepl {
       ls: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         const cwd = (args && args[0] && resolvePath(this.cwd, args[0])) || this.cwd
-        // console.log('CWD:', cwd, resolvePath(this.cwd, args[0]), this.cwd, args[0])
         glob('*', { mark: true, cwd, fs: this._dat.archive }, (err, files) => {
           if (err) { return reject(err) }
           resolve(files.filter(Boolean))
@@ -105,7 +104,7 @@ class MakeRepl {
           this._previousCwd = this.cwd
           this.cwd = args && args[0]
         }
-        this._replServer.setPrompt(makePrompt())
+        this._replServer.setPrompt(this._makePrompt())
       },
       pwd: (args) => this.cwd,
       dat: (args) => {
@@ -113,7 +112,7 @@ class MakeRepl {
         return this.datKey
       },
       state: (args) => {
-        const lines = [...commands.version(), '', `cwd: ${this.cwd}`]
+        const lines = [...this._commands.version(), '', `cwd: ${this.cwd}`]
         if (this._previousCwd) { lines.push(`previousCwd: ${this._previousCwd}`) }
         if (this._datKeyProvided) { lines.push(`datKeyProvided: ${this._datKeyProvided}`) }
         if (this.datKey) { lines.push(`datKey: ${this.datKey}`) }
@@ -123,42 +122,49 @@ class MakeRepl {
       exit: (args) => process.exit((args && parseInt(args[0], 10)) || 0)
     }
 
-    commands['.help'].help = 'Internal repl commands.'
-    commands.help.help = 'List of commands and their descriptions.'
-    commands.ls.help = 'List files.'
-    commands.cd.help = 'Change directory.'
-    commands.sl.help = 'Train yourself to avoid typos.'
-    commands.pwd.help = 'Output current working directory.'
-    commands.dat.help = 'dat -c to close; dat <KEY> to open; dat to output current key.'
-    commands.state.help = 'Output current state.'
-    commands.version.help = 'Current dat-shell version.'
-    commands.exit.help = 'Exit dat-shell (or CTRL-D).'
+    this._commands['.help'].help = 'Internal repl this._commands.'
+    this._commands.help.help = 'List of this._commands and their descriptions.'
+    this._commands.ls.help = 'List files.'
+    this._commands.cd.help = 'Change directory.'
+    this._commands.sl.help = 'Train yourself to avoid typos.'
+    this._commands.pwd.help = 'Output current working directory.'
+    this._commands.dat.help = 'dat -c to close; dat <KEY> to open; dat to output current key.'
+    this._commands.state.help = 'Output current state.'
+    this._commands.version.help = 'Current dat-shell version.'
+    this._commands.exit.help = 'Exit dat-shell (or CTRL-D).'
 
     this._options = {
-      prompt: makePrompt(),
+      prompt: this._makePrompt(),
       ignoreUndefined: true,
       writer,
       eval: (str, context, filename, callback) => {
         str = str.slice(0, -1) // remove trailing \n
         const parts = str.split(' ') // FIXME do it as bash (quotes, etc.)
         const cmd = parts[0]
-        // FIXME make all commands async
+        // FIXME make all this._commands async
         if (asyncs.indexOf(cmd) !== -1) {
-          return commands[cmd](parts.slice(1))
+          return this._commands[cmd](parts.slice(1))
             .then((X) => callback(null, X))
             .catch(callback)
         }
-        if (commands[cmd]) { return callback(null, commands[cmd](parts.slice(1))) }
+        if (this._commands[cmd]) { return callback(null, this._commands[cmd](parts.slice(1))) }
         callback(null, notFound(str))
       }
     }
 
-    console.log(commands.state().join('\n'))
-    console.log(commands.help().join('\n'))
+    console.log(this._commands.state().join('\n'))
+    console.log(this._commands.help().join('\n'))
   }
 
-  get cwd () { return this._cwd || '/' }
-  set cwd (d) { this._cwd = `${resolvePath(this.cwd, d || '/')}/` }
+  get cwd () { return this._cwd }
+  set cwd (d) {
+    const lastCwd = this.cwd
+    this._cwd = `${resolvePath(this.cwd, d || '/')}`
+    if (this._cwd.slice(-1) !== '/') { this._cwd += '/' }
+    this._commands.ls()
+      .then((X) => this._replServer.setPrompt(this._makePrompt()))
+      .catch((err) => { this.cwd = lastCwd })
+  }
 
   start () {
     this._replServer = repl.start(this._options)
