@@ -11,6 +11,11 @@ dat-shell is part of the [dat][] Peer-to-Peer universe. It's useful to explore r
 $ npm install --global dat-shell
 ```
 
+### Requirements
+You'll need node 8.9.1 (LTS) or above. I suggest using [n-install] to install the ```n``` node version manager.
+
+You'll probably need ```git``` too since we're using my (temporary) fork of glob to support hyperdrives (dat archives), and that fork is only available on github and not (yet) on npm.
+
 ## Usage
 ```sh
 $ dat-shell <dat-key> # dat-key is optionnal
@@ -32,10 +37,18 @@ $ npm install --global dat-shell
 ```
 
 ## TODO
-* Colors
+There's lots to do, classified here in bugs and features.
+
+### Bugs
 * Improve cd handling (limit to actual directories)
 * Improve ls handling (arguments, long version, etc.)
 * Improve args quoting (*à la* bash)
+* Add custom command completion
+* Improve error messages
+
+### Features
+* Improve help, add command descriptions
+* Colors
 * Make all commands async (promises)
 * Improve user responses
 * Make prompt configurable (*à la* bash)
@@ -48,10 +61,7 @@ $ npm install --global dat-shell
 * Gemnasium batch
 * Enable usage as: dat-shell KEY ls (non-interactive)
 * Support plugins
-* Improve help, add command descriptions
-* Add custom command completion
 * Add debugging options and output
-* Improve error messages
 * Evaluate [shelljs][] for integration
 * Evaluate [cash][] for integration
 * Evaluate [vorpal][] for integration
@@ -65,3 +75,4 @@ AGPL-v3 © 2017 [Robin Millette][]
 [shelljs]: <https://github.com/shelljs/shelljs>
 [cash]: <https://github.com/dthree/cash>
 [vorpal]: <https://github.com/dthree/vorpal>
+[n-install]: <https://github.com/mklement0/n-install>
