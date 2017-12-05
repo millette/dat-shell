@@ -156,7 +156,7 @@ class MakeRepl {
     console.log(this._commands.help().join('\n'))
   }
 
-  get cwd () { return this._cwd }
+  get cwd () { return this._cwd || '/' }
   set cwd (d) {
     const lastCwd = this.cwd
     this._cwd = `${resolvePath(this.cwd, d || '/')}`
