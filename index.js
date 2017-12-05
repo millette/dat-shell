@@ -35,10 +35,10 @@ const doit = (key) => new Promise((resolve, reject) => {
 const notFound = (str) => str ? `Command '${str}' not found.` : undefined
 
 const writer = (str) => {
-  if (typeof str === 'string') { return str }
-  if (typeof str === 'object' && str.length) { return str.join('\n') }
-  if (typeof str === 'object') { return JSON.stringify(str, null, '  ') }
-  return str
+  if (typeof str === 'string') { return str + '\n' }
+  if (typeof str === 'object' && str.length) { return str.join('\n') + '\n' }
+  if (typeof str === 'object') { return JSON.stringify(str, null, '  ') + '\n' }
+  return str + '\n'
 }
 
 class MakeRepl {
