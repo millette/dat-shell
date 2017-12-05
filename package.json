@@ -1,0 +1,20 @@
+{
+  "name": "dat-shell",
+  "version": "0.0.0",
+  "license": "AGPL-3.0",
+  "main": "index.js",
+  "bin": [
+    "cli.js"
+  ],
+  "scripts": {
+    "lint": "standard"
+  },
+  "dependencies": {
+    "dat-node": "^3.5.6",
+    "glob": "millette/node-glob#opt-fs",
+    "random-access-memory": "^2.4.0"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}
