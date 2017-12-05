@@ -40,22 +40,22 @@ $ npm install --global dat-shell
 There's lots to do, classified here in bugs and features.
 
 ### Bugs
+* Add custom command completion
 * Improve ls handling (arguments, long version, etc.)
 * Improve args quoting (*à la* bash)
-* Add custom command completion
 * Improve error messages
 
 ### Features
-* Improve help, add long command descriptions
-* Colors
-* Make all commands async (promises)
-* Improve user responses
-* Make prompt configurable (*à la* bash)
 * Add cp command
 * Add cat command
 * Add more command
 * Add tail command
 * Add tree command
+* Improve help, add long command descriptions
+* Colors
+* Make all commands async (promises)
+* Improve user responses
+* Make prompt configurable (*à la* bash)
 * Unit tests, travis, coveralls
 * Gemnasium batch
 * Enable usage as: dat-shell KEY ls (non-interactive)
