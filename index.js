@@ -158,12 +158,13 @@ class MakeRepl {
 
   get cwd () { return this._cwd || '/' }
   set cwd (d) {
+    if (!this._dat) { return }
     const lastCwd = this.cwd
     this._cwd = `${resolvePath(this.cwd, d || '/')}`
     if (this._cwd.slice(-1) !== '/') { this._cwd += '/' }
     this._commands.ls()
-      .then((X) => this._replServer.setPrompt(this._makePrompt()))
-      .catch((err) => { this.cwd = lastCwd })
+      .then(() => this._replServer.setPrompt(this._makePrompt()))
+      .catch(() => { this.cwd = lastCwd })
   }
 
   start () {
