@@ -75,7 +75,7 @@ class MakeRepl {
     this._commands = {
       '.help': {},
       help: (args) => {
-        const lines = ['Available this._commands:']
+        const lines = ['Available commands:']
         let r
         let str
         for (r in this._commands) {
@@ -122,8 +122,8 @@ class MakeRepl {
       exit: (args) => process.exit((args && parseInt(args[0], 10)) || 0)
     }
 
-    this._commands['.help'].help = 'Internal repl this._commands.'
-    this._commands.help.help = 'List of this._commands and their descriptions.'
+    this._commands['.help'].help = 'Internal repl commands.'
+    this._commands.help.help = 'List of commands and their descriptions.'
     this._commands.ls.help = 'List files.'
     this._commands.cd.help = 'Change directory.'
     this._commands.sl.help = 'Train yourself to avoid typos.'
