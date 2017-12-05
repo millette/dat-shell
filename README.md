@@ -16,12 +16,12 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 
 ## Install
 ```
-$ npm install --save dat-shell
+$ npm install --global dat-shell
 ```
 
 ## Usage
 ```sh
-$ dat-shell <dat-key>
+$ dat-shell <dat-key> # dat-key is optionnal
 ```
 
 ## License

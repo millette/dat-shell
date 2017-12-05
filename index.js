@@ -19,7 +19,7 @@ class MakeRepl {
 
     const commands = {
       '.help': () => {},
-      help: function (args) { return `Available commands: ${Object.keys(this).join(', ')}` },
+      help: (args) => `Available commands: ${Object.keys(commands).join(', ')}`,
       ls: (args) => `ls ${args.join(' - ')}`,
       sl: (args) => 'Choo! Choo!',
       cd: (args) => {
@@ -38,9 +38,9 @@ class MakeRepl {
         return this.datKey
       },
       state: (args) => {
-        return `cwd: ${this.cwd}\npreviousCwd: ${this._previousCwd || ''}\ndatKey: ${this.datKey || ''}`
+        return `${commands.version()}\n\ncwd: ${this.cwd}\npreviousCwd: ${this._previousCwd || ''}\ndatKey: ${this.datKey || ''}`
       },
-      version: (args) => `${this.pkg.name} v${this.pkg.version}`,
+      version: (args) => `${this.pkg.name} v${this.pkg.version}\n${this.pkg.description}`,
       exit: (args) => process.exit((args && parseInt(args[0], 10)) || 0)
     }
 
