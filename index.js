@@ -14,7 +14,7 @@ const notFound = (str) => str ? `Command '${str}' not found.` : undefined
 
 class MakeRepl {
   constructor (opts) {
-    if (opts.key) { this.datKey = opts.key }
+    Object.assign(this, opts)
     const makePrompt = () => `dat-shell ${this.cwd} $ `
 
     const commands = {
@@ -40,6 +40,7 @@ class MakeRepl {
       state: (args) => {
         return `cwd: ${this.cwd}\npreviousCwd: ${this._previousCwd || ''}\ndatKey: ${this.datKey || ''}`
       },
+      version: (args) => `${this.pkg.name} v${this.pkg.version}`,
       exit: (args) => process.exit((args && parseInt(args[0], 10)) || 0)
     }
 
