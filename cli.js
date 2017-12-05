@@ -31,5 +31,6 @@ const pkg = require('./package.json')
 const updateNotifier = require('update-notifier')
 
 const rr = new DatRepl({ pkg, datKey: process.argv[2] })
-rr.start()
+if (rr.datKey) { console.log('datKey:', rr.datKey) }
+
 updateNotifier({ pkg }).notify()

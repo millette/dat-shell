@@ -33,7 +33,7 @@ const openDat = (key) => new Promise((resolve, reject) => {
   })
 })
 
-const notFound = (str) => str ? `Command '${str}' not found.` : undefined
+const notFound = (cmd) => Object.assign(new Error(`Command not found.`), { cmd })
 
 const writer = (str) => {
   if (typeof str === 'string') { return str + '\n' }
@@ -43,29 +43,6 @@ const writer = (str) => {
 }
 
 class MakeRepl {
-  get datKey () { return this._datKey }
-
-  set datKey (key) {
-    if (key) {
-      if (this._datKey !== key) {
-        if (this._datKey && this._dat && this._dat.close) { this._dat.close() }
-        openDat(key)
-          .then((dat) => {
-            this._dat = dat
-            this._datKey = dat.key.toString('hex')
-            if (this._datKey !== key) { this._datKeyProvided = key }
-            this.cwd = '/'
-          })
-      }
-    } else if (this._datKey && this._dat && this._dat.close) {
-      this._dat.close()
-      this._datKey = undefined
-      this._datKeyProvided = undefined
-    }
-  }
-
-  _makePrompt () { return `dat-shell ${this.cwd} $ ` }
-
   constructor (opts) {
     Object.assign(this, opts)
     if (opts.datKey) { this._datKeyProvided = opts.datKey }
@@ -133,14 +110,15 @@ class MakeRepl {
     this._commands.version.help = 'Current dat-shell version.'
     this._commands.exit.help = 'Exit dat-shell (or CTRL-D).'
 
-    this._options = {
+    const startOptions = {
       prompt: this._makePrompt(),
       ignoreUndefined: true,
       writer,
       eval: (str, context, filename, callback) => {
-        str = str.slice(0, -1) // remove trailing \n
+        str = str.trim()
         const parts = str.split(' ') // FIXME do it as bash (quotes, etc.)
         const cmd = parts[0]
+        if (!str) { return callback() }
         // FIXME make all this._commands async
         if (asyncs.indexOf(cmd) !== -1) {
           return this._commands[cmd](parts.slice(1))
@@ -148,13 +126,18 @@ class MakeRepl {
             .catch(callback)
         }
         if (this._commands[cmd]) { return callback(null, this._commands[cmd](parts.slice(1))) }
-        callback(null, notFound(str))
+        callback(notFound(str))
       }
     }
 
     console.log(this._commands.state().join('\n'))
     console.log(this._commands.help().join('\n'))
+    this._replServer = repl.start(startOptions)
   }
+
+  _makePrompt () { return `dat-shell ${this.cwd} $ ` }
+
+  get replServer () { return this._replServer }
 
   get cwd () { return this._cwd || '/' }
   set cwd (d) {
@@ -167,9 +150,24 @@ class MakeRepl {
       .catch(() => { this.cwd = lastCwd })
   }
 
-  start () {
-    this._replServer = repl.start(this._options)
-    return this._replServer
+  get datKey () { return this._datKey }
+  set datKey (key) {
+    if (key) {
+      if (this._datKey !== key) {
+        if (this._datKey && this._dat && this._dat.close) { this._dat.close() }
+        openDat(key)
+          .then((dat) => {
+            this._dat = dat
+            this._datKey = dat.key.toString('hex')
+            if (this._datKey !== key) { this._datKeyProvided = key }
+            this.cwd = '/'
+          })
+      }
+    } else if (this._datKey && this._dat && this._dat.close) {
+      this._dat.close()
+      this._datKey = undefined
+      this._datKeyProvided = undefined
+    }
   }
 }
 
