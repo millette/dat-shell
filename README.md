@@ -23,6 +23,16 @@ $ dat-shell <dat-key> # dat-key is optionnal
 
 For example, you can access this readme and scripts at: <dat://ae8c136e04a66451c79325681d4593bc3ce30c8005dfa5fc6001e0898ec4573a>
 
+```sh
+$ dat-shell dat://ae8c136e04a66451c79325681d4593bc3ce30c8005dfa5fc6001e0898ec4573a
+# or
+$ dat-shell ae8c136e04a66451c79325681d4593bc3ce30c8005dfa5fc6001e0898ec4573a
+# or
+$ dat-shell dat://dat-shell-millette.hashbase.io/
+```
+
+You might wonder about <dat://dat-shell-millette.hashbase.io/> but it's perfectly valid since the hostname maps to the ```ae8c...573a``` key through https discovery.
+
 ## Upgrading
 The cli now uses [update-notifier][] to let the user know about updates to this program.
 
@@ -43,6 +53,7 @@ There's lots to do, classified here in bugs and features.
 
 ### Bugs
 * Improve error messages
+* Prevent cd into a file (doh)
 
 ### Features
 * Add cp command
