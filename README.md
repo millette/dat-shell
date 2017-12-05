@@ -33,6 +33,9 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 * Improve user responses
 * Make prompt configurable (à la bash)
 * Add cp command
+* Add cat command
+* Add more command
+* Add tail command
 * Unit tests, travis, coveralls
 * Gemnasium batch
 * Enable usage as: dat-shell KEY ls (non-interactive)
