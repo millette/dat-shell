@@ -2,3 +2,7 @@ node_modules
 .nyc_output
 npm-debug.log
 .travis.yml
+demo.html
+index.html
+wa.js
+.datignore
