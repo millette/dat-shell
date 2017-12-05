@@ -7,7 +7,7 @@
 dat-shell is part of the [dat][] Peer-to-Peer universe. It's useful to explore remote dats by their key without having to download them. Think of it as bash for dats, letting you ```cd```, ```ls``` and ```cp``` at will.
 
 ## Install
-```
+```sh
 $ npm install --global dat-shell
 ```
 
@@ -25,6 +25,11 @@ The path is available in notifier.config.path.
 
 Users can also opt-out by setting the environment variable NO_UPDATE_NOTIFIER
 with any value or by using the --no-update-notifier flag on a per run basis.
+
+To upgrade, simply
+```sh
+$ npm install --global dat-shell
+```
 
 ## TODO
 * Colors
@@ -47,6 +52,9 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 * Add custom command completion
 * Add debugging options and output
 * Improve error messages
+* Evaluate [shelljs][] for integration
+* Evaluate [cash][] for integration
+* Evaluate [vorpal][] for integration
 
 ## License
 AGPL-v3 © 2017 [Robin Millette][]
@@ -54,3 +62,6 @@ AGPL-v3 © 2017 [Robin Millette][]
 [Robin Millette]: <http://robin.millette.info>
 [update-notifier]: <https://github.com/yeoman/update-notifier>
 [dat]: <https://datproject.org/>
+[shelljs]: <https://github.com/shelljs/shelljs>
+[cash]: <https://github.com/dthree/cash>
+[vorpal]: <https://github.com/dthree/vorpal>
