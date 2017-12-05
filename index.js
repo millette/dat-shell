@@ -7,6 +7,7 @@ const glob = require('glob')
 
 // core
 const repl = require('repl')
+const resolvePath = require('path').resolve
 
 const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
@@ -36,7 +37,7 @@ const notFound = (str) => str ? `Command '${str}' not found.` : undefined
 
 const writer = (str) => {
   if (typeof str === 'string') { return str + '\n' }
-  if (typeof str === 'object' && str.length) { return str.join('\n') + '\n' }
+  if (typeof str === 'object' && str.length !== undefined) { return str.join('\n') + '\n' }
   if (typeof str === 'object') { return JSON.stringify(str, null, '  ') + '\n' }
   return str + '\n'
 }
@@ -88,11 +89,11 @@ class MakeRepl {
       },
       ls: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
-        glob('*', { mark: true, cwd: this.cwd, fs: this._dat.archive }, (err, files) => {
+        const cwd = (args && args[0] && resolvePath(this.cwd, args[0])) || this.cwd
+        // console.log('CWD:', cwd, resolvePath(this.cwd, args[0]), this.cwd, args[0])
+        glob('*', { mark: true, cwd, fs: this._dat.archive }, (err, files) => {
           if (err) { return reject(err) }
-          Promise.all(files.filter(Boolean))
-            .then(resolve)
-            .catch(reject)
+          resolve(files.filter(Boolean))
         })
       }),
       sl: (args) => 'Choo! Choo!',
@@ -106,7 +107,7 @@ class MakeRepl {
         }
         this._replServer.setPrompt(makePrompt())
       },
-      pwd: () => this.cwd,
+      pwd: (args) => this.cwd,
       dat: (args) => {
         if (args && args[0]) { this.datKey = (args[0] === '--close' || args[0] === '-c') ? false : args[0] }
         return this.datKey
@@ -157,11 +158,7 @@ class MakeRepl {
   }
 
   get cwd () { return this._cwd || '/' }
-
-  set cwd (d) {
-    this._cwd = d || '/'
-    if (this._cwd[0] !== '/') { this._cwd = `/${this._cwd}` }
-  }
+  set cwd (d) { this._cwd = `${resolvePath(this.cwd, d || '/')}/` }
 
   start () {
     this._replServer = repl.start(this._options)
