@@ -40,9 +40,6 @@ $ npm install --global dat-shell
 There's lots to do, classified here in bugs and features.
 
 ### Bugs
-* Add custom command completion
-* Improve ls handling (arguments, long version, etc.)
-* Improve args quoting (*à la* bash)
 * Improve error messages
 
 ### Features
@@ -51,6 +48,9 @@ There's lots to do, classified here in bugs and features.
 * Add more command
 * Add tail command
 * Add tree command
+* Add custom command completion
+* Improve ls handling (arguments, long version, etc.)
+* Improve args quoting (*à la* bash)
 * Improve help, add long command descriptions
 * Colors
 * Make all commands async (promises)
