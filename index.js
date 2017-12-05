@@ -12,6 +12,13 @@ const repl = require('repl')
 
 const notFound = (str) => str ? `Command '${str}' not found.` : undefined
 
+const writer = (str) => {
+  if (typeof str === 'string') { return str }
+  if (typeof str === 'object' && str.length) { return str.join('\n') }
+  if (typeof str === 'object') { return JSON.stringify(object, null, '  ') }
+  return str
+}
+
 class MakeRepl {
   constructor (opts) {
     Object.assign(this, opts)
@@ -38,16 +45,19 @@ class MakeRepl {
         return this.datKey
       },
       state: (args) => {
-        return `${commands.version()}\n\ncwd: ${this.cwd}\npreviousCwd: ${this._previousCwd || ''}\ndatKey: ${this.datKey || ''}`
+        const lines = [...commands.version(), '', `cwd: ${this.cwd}`]
+        if (this._previousCwd) { lines.push(`previousCwd: ${this._previousCwd}`) }
+        if (this.datKey) { lines.push(`datKey: ${this.datKey}`) }
+        return lines
       },
-      version: (args) => `${this.pkg.name} v${this.pkg.version}\n${this.pkg.description}`,
+      version: (args) => [`${this.pkg.name} v${this.pkg.version}`, `${this.pkg.description}`],
       exit: (args) => process.exit((args && parseInt(args[0], 10)) || 0)
     }
 
     this._options = {
       prompt: makePrompt(),
       ignoreUndefined: true,
-      writer: (str) => str,
+      writer,
       eval: (str, context, filename, callback) => {
         str = str.slice(0, -1) // remove trailing \n
         const parts = str.split(' ') // FIXME do it as bash (quotes, etc.)
@@ -56,6 +66,8 @@ class MakeRepl {
         callback(null, notFound(str))
       }
     }
+
+    console.log(commands.state().join('\n'))
   }
 
   get cwd () { return this._cwd || '/' }
