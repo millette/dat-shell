@@ -6,6 +6,9 @@
   "bin": [
     "cli.js"
   ],
+  "engines": {
+    "node": ">=8.9.1"
+  },
   "scripts": {
     "lint": "standard"
   },
