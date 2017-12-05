@@ -21,7 +21,7 @@ You'll probably need ```git``` too since we're using my (temporary) fork of glob
 $ dat-shell <dat-key> # dat-key is optionnal
 ```
 
-For example, you can access this readme and scripts at <dat://ae8c136e04a66451c79325681d4593bc3ce30c8005dfa5fc6001e0898ec4573a>.
+For example, you can access this readme and scripts at: <dat://ae8c136e04a66451c79325681d4593bc3ce30c8005dfa5fc6001e0898ec4573a>
 
 ## Upgrading
 The cli now uses [update-notifier][] to let the user know about updates to this program.
