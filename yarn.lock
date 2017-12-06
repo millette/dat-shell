@@ -732,6 +732,13 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
+downmark-stream@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/downmark-stream/-/downmark-stream-1.0.0.tgz#24f70cd176af571444f019f21d0409cc26fa9ca6"
+  dependencies:
+    marked "^0.3.5"
+    readable-stream "^2.0.4"
+
 duplexer2@~0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.0.2.tgz#c614dcf67e2fb14995a91711e5a617e8a60a31db"
@@ -1897,7 +1904,7 @@ marked-terminal@^2.0.0:
     lodash.assign "^4.2.0"
     node-emoji "^1.4.1"
 
-marked@^0.3.7:
+marked@^0.3.5, marked@^0.3.7:
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.7.tgz#80ef3bbf1bd00d1c9cfebe42ba1b8c85da258d0d"
 
