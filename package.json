@@ -9,6 +9,12 @@
     "email": "robin@millette.info",
     "url": "http://robin.millette.info"
   },
+  "keywords": [
+    "cli",
+    "dat",
+    "shell",
+    "hyperdrive"
+  ],
   "main": "index.js",
   "bin": {
     "dat-shell": "cli.js"
