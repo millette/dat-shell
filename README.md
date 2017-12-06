@@ -61,6 +61,7 @@ There's lots to do, classified here in bugs and features.
 * Add more command
 * Add tail command
 * Add tree command
+* Browse versions (history)
 * Add custom command completion
 * Improve ls handling (arguments, long version, etc.)
 * Improve args quoting (*à la* bash)
@@ -77,6 +78,11 @@ There's lots to do, classified here in bugs and features.
 * Evaluate [shelljs][] for integration
 * Evaluate [cash][] for integration
 * Evaluate [vorpal][] for integration
+
+### Ideas from #dat on freenode (IRC)
+* creationix: would be cool to have the ability to run scripts in dat-shell
+* creationix: pluggable vms for running scripts, scripts could list dependencies via dat urls, maybe even load native vm code from dats
+* scriptjs: Would be nice if the licence for dat-shell was aligned with the dat ecosystem MIT please
 
 ## License
 AGPL-v3 © 2017 [Robin Millette][]
