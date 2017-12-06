@@ -6,7 +6,7 @@
 
 dat-shell is part of the [dat][] Peer-to-Peer universe. It's useful to explore remote dats by their key without having to download them. Think of it as bash for dats, letting you ```cd```, ```ls``` and ```cp``` at will.
 
-![dat-shell screencast][output]
+![dat-shell screencast][screencast]
 
 ## Install
 ```sh
@@ -16,7 +16,7 @@ $ npm install --global dat-shell
 ### Requirements
 You'll need node 8.9.1 (LTS) or above. I suggest using [n-install] to install the ```n``` node version manager.
 
-You'll probably need ```git``` too since we're using my (temporary) fork of glob to support hyperdrives (dat archives), and that fork is only available on github and not (yet) on npm.
+You'll probably need ```git``` too since we're using my (temporary) fork of glob to support hyperdrives (dat archives), and that fork is only available on github and not (yet) on npm. See <#XX> to help merge my glob fork.
 
 ## Usage
 ```sh
@@ -53,10 +53,14 @@ $ npm install --global dat-shell
 ## TODO
 There's lots to do, classified here in bugs and features.
 
+### Merge glob
+There's an [issue on glob to allow other fs implementations][glob280]. This allows glob to work on dat archives (and the hyperdrive beneath).
+
 ### Bugs
 * Improve error messages
 * Prevent cd into a file (doh)
 * Copy to directory (currently, a destination filename is required)
+* Replace current dat for this project with a new one (current has way to many files in its history)
 
 ### Features
 * Add more command
@@ -82,6 +86,11 @@ There's lots to do, classified here in bugs and features.
 * Add bookmark support (compatible with beaker, hopefully)
 * Make sure it works cross-platform (posix, windows)
 * Add text browser mode (à la lynx)
+* Package self-contained binary with pkg
+
+### Optimisations (speed or size)
+* Replace marked-terminal and update-notifier with smaller equivalents
+* Replace mississippi with used modules (pipeline, etc.)
 
 ### Ideas from #dat on freenode (IRC)
 * creationix: would be cool to have the ability to run scripts in dat-shell
@@ -98,4 +107,5 @@ AGPL-v3 © 2017 [Robin Millette][]
 [cash]: <https://github.com/dthree/cash>
 [vorpal]: <https://github.com/dthree/vorpal>
 [n-install]: <https://github.com/mklement0/n-install>
-[output]: output.gif "dat-shell demontration"
+[glob280]: <https://github.com/isaacs/node-glob/issues/280#issuecomment-348816454>
+[screencast]: output.gif "dat-shell screencast"
