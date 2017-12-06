@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "dat-node": "^3.5.6",
+    "expand-tilde": "^2.0.2",
     "glob": "millette/node-glob#opt-fs",
     "html-to-ansi": "^1.0.1",
     "marked": "^0.3.7",
