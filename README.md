@@ -1,6 +1,6 @@
 # dat-shell
 [![Standard JS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)][standardjs]
-[![npm](https://img.shields.io/npm/v/dat-shell.svg)(https://www.npmjs.com/package/dat-shell)
+[![npm](https://img.shields.io/npm/v/dat-shell.svg)](https://www.npmjs.com/package/dat-shell)
 [![Build Status](https://travis-ci.org/millette/dat-shell.svg?branch=master)](https://travis-ci.org/millette/dat-shell)
 [![Coverage Status](https://coveralls.io/repos/github/millette/dat-shell/badge.svg?branch=master)](https://coveralls.io/github/millette/dat-shell?branch=master)
 [![Dependency Status](https://gemnasium.com/badges/github.com/millette/dat-shell.svg)](https://gemnasium.com/github.com/millette/dat-shell)
