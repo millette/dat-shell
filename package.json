@@ -1,7 +1,7 @@
 {
   "name": "dat-shell",
   "description": "Dat shell. Open a remote dat and explore with cd, ls, etc.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "license": "AGPL-3.0",
   "main": "index.js",
   "bin": {
