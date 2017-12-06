@@ -6,6 +6,8 @@
 
 dat-shell is part of the [dat][] Peer-to-Peer universe. It's useful to explore remote dats by their key without having to download them. Think of it as bash for dats, letting you ```cd```, ```ls``` and ```cp``` at will.
 
+![dat-shell screencast][output]
+
 ## Install
 ```sh
 $ npm install --global dat-shell
@@ -96,3 +98,4 @@ AGPL-v3 © 2017 [Robin Millette][]
 [cash]: <https://github.com/dthree/cash>
 [vorpal]: <https://github.com/dthree/vorpal>
 [n-install]: <https://github.com/mklement0/n-install>
+[output]: output.gif "dat-shell demontration"
