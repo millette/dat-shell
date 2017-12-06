@@ -8,7 +8,6 @@ const miss = require('mississippi')
 const stdout = require('stdout')
 const expandTilde = require('expand-tilde')
 const mime = require('mime')
-const marked = require('marked')
 const TerminalRenderer = require('marked-terminal')
 const DownmarkStream = require('downmark-stream')
 const html2ansi = require('html-to-ansi')
@@ -18,8 +17,6 @@ const repl = require('repl')
 const resolvePath = require('path').resolve
 const fs = require('fs')
 const util = require('util')
-
-marked.setOptions({ renderer: new TerminalRenderer() })
 
 const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
@@ -126,7 +123,7 @@ class MakeRepl {
             })
 
           case 'text/markdown':
-            return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), DownmarkStream(), stdout(), (err) => {
+            return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), DownmarkStream({ renderer: new TerminalRenderer() }), stdout(), (err) => {
               if (err) { return reject(err) }
               resolve()
             })
@@ -190,6 +187,7 @@ class MakeRepl {
     this._commands.ls.help = 'List files.'
     this._commands.file.help = 'Detect mimetype.'
     this._commands.cat.help = 'View a file (concatenate).'
+    this._commands.view.help = 'Generic view command (text, markdown, html, etc.).'
     this._commands.cp.help = 'Copy a file from remote dat to local filesystem.'
     this._commands.cd.help = 'Change directory.'
     this._commands.sl.help = 'Train yourself to avoid typos.'
