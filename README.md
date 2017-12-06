@@ -1,4 +1,6 @@
 # dat-shell
+[![Standard JS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)][standardjs]
+[![npm](https://img.shields.io/npm/v/dat-shell.svg)(https://www.npmjs.com/package/dat-shell)
 [![Build Status](https://travis-ci.org/millette/dat-shell.svg?branch=master)](https://travis-ci.org/millette/dat-shell)
 [![Coverage Status](https://coveralls.io/repos/github/millette/dat-shell/badge.svg?branch=master)](https://coveralls.io/github/millette/dat-shell?branch=master)
 [![Dependency Status](https://gemnasium.com/badges/github.com/millette/dat-shell.svg)](https://gemnasium.com/github.com/millette/dat-shell)
@@ -53,6 +55,10 @@ $ npm install --global dat-shell
 ## TODO
 There's lots to do, classified here in bugs and features.
 
+I should probably move most of the items below to GitHub issues and establish a roadmap.
+
+Needless to say, I'm 100% open to contributions.
+
 ### Merge glob
 There's an [issue on glob to allow other fs implementations][glob280]. This allows glob to work on dat archives (and the hyperdrive beneath).
 
@@ -61,6 +67,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Prevent cd into a file (doh)
 * Copy to directory (currently, a destination filename is required)
 * Replace current dat for this project with a new one (current has way to many files in its history)
+* Improve screencast (demo)
 
 ### Features
 * Add more command
@@ -76,7 +83,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Improve user responses
 * Make prompt configurable (*à la* bash)
 * Unit tests, travis, coveralls
-* Gemnasium batch
+* Gemnasium badge
 * Enable usage as: dat-shell KEY ls (non-interactive)
 * Support plugins
 * Add debugging options and output
@@ -87,6 +94,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Make sure it works cross-platform (posix, windows)
 * Add text browser mode (à la lynx)
 * Package self-contained binary with pkg
+* "Implement" [standard-readme][]
 
 ### Optimisations (speed or size)
 * Replace marked-terminal and update-notifier with smaller equivalents
@@ -109,4 +117,7 @@ AGPL-v3 © 2017 [Robin Millette][]
 [n-install]: <https://github.com/mklement0/n-install>
 [glob280]: <https://github.com/isaacs/node-glob/issues/280#issuecomment-348816454>
 [merge-glob]: <#merge-glob>
+[standard-readme]: <https://github.com/RichardLitt/standard-readme>
+[standardjs]: <https://standardjs.com/>
+
 [screencast]: output.gif "dat-shell screencast"
