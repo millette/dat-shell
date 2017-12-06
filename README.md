@@ -56,7 +56,7 @@ There's lots to do, classified here in bugs and features.
 * Prevent cd into a file (doh)
 
 ### Features
-* Add cp command
+* Add generic view command (text, markdown, html, etc.)
 * Add more command
 * Add tail command
 * Add tree command
@@ -78,6 +78,7 @@ There's lots to do, classified here in bugs and features.
 * Evaluate [cash][] for integration
 * Evaluate [vorpal][] for integration
 * Add bookmark support (compatible with beaker, hopefully)
+* Make sure it works cross-platform (posix, windows)
 
 ### Ideas from #dat on freenode (IRC)
 * creationix: would be cool to have the ability to run scripts in dat-shell

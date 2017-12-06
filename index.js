@@ -6,10 +6,12 @@ const ram = require('random-access-memory')
 const glob = require('glob')
 const miss = require('mississippi')
 const stdout = require('stdout')
+const expandTilde = require('expand-tilde')
 
 // core
 const repl = require('repl')
 const resolvePath = require('path').resolve
+const fs = require('fs')
 
 const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
@@ -29,7 +31,7 @@ const openDat = (key) => new Promise((resolve, reject) => {
     dat.network.once('listening', () => {
       tooBad = setTimeout(() => {
         dat.leaveNetwork() // preferable to dat.close() in this specific case
-        reject(new Error('Timeout'))
+        reject(new Error('Timeout.'))
       }, 1000)
     })
   })
@@ -49,7 +51,7 @@ class MakeRepl {
     Object.assign(this, opts)
     if (opts.datKey) { this._datKeyProvided = opts.datKey }
 
-    const asyncs = ['ls', 'cat']
+    const asyncs = ['ls', 'cat', 'cp']
 
     this._commands = {
       '.help': {},
@@ -66,9 +68,19 @@ class MakeRepl {
         }
         return lines
       },
+      cp: (args) => new Promise((resolve, reject) => {
+        if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
+        if (!args || args.length !== 2) { return reject(new Error('cp requires two file arguments.')) }
+        const inFile = this._dat.archive.createReadStream(resolvePath(this.cwd, args[0]))
+        const outFile = fs.createWriteStream(expandTilde(args[1]))
+        miss.pipe(inFile, outFile, (err) => {
+          if (err) { return reject(err) }
+          resolve()
+        })
+      }),
       cat: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
-        if (!args || !args[0]) { return reject(new Error('cat requires a file argument')) }
+        if (!args || !args[0]) { return reject(new Error('cat requires a file argument.')) }
         miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
           if (err) { return reject(err) }
           resolve()
@@ -113,6 +125,7 @@ class MakeRepl {
     this._commands.help.help = 'List of commands and their descriptions.'
     this._commands.ls.help = 'List files.'
     this._commands.cat.help = 'View a file (concatenate).'
+    this._commands.cp.help = 'Copy a file from remote dat to local filesystem.'
     this._commands.cd.help = 'Change directory.'
     this._commands.sl.help = 'Train yourself to avoid typos.'
     this._commands.pwd.help = 'Output current working directory.'
