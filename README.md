@@ -52,12 +52,13 @@ To upgrade, simply
 $ npm install --global dat-shell
 ```
 
+## Contribute
+Needless to say, I'm 100% open to contributions. Unit tests are coming soon, but for now make sure to follow the [StandardJS][standardjs] coding style (no semi-colons, etc). Run either ```yarn lint``` or ```npm run lint``` to verify.
+
 ## TODO
 There's lots to do, classified here in bugs and features.
 
 I should probably move most of the items below to GitHub issues and establish a roadmap.
-
-Needless to say, I'm 100% open to contributions.
 
 ### Merge glob
 There's an [issue on glob to allow other fs implementations][glob280]. This allows glob to work on dat archives (and the hyperdrive beneath).
@@ -67,7 +68,8 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Prevent cd into a file (doh)
 * Copy to directory (currently, a destination filename is required)
 * Replace current dat for this project with a new one (current has way to many files in its history)
-* Improve screencast (demo)
+* Improve screencast (demo), see <https://twitter.com/pfrazee/status/938448616854876160>
+* dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works
 
 ### Features
 * Add more command
@@ -95,8 +97,9 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Add text browser mode (à la lynx)
 * Package self-contained binary with pkg
 * "Implement" [standard-readme][]
+* Handle cwd given dat://4505de...dba1/fonts/ (automatically: cd /fonts)
 
-### Optimisations (speed or size)
+### Optimizations (speed or size)
 * Replace marked-terminal and update-notifier with smaller equivalents
 * Replace mississippi with used modules (pipeline, etc.)
 
