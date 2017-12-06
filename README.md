@@ -58,6 +58,7 @@ There's lots to do, classified here in bugs and features.
 ### Bugs
 * Improve error messages
 * Prevent cd into a file (doh)
+* Copy to directory (currently, a destination filename is required)
 
 ### Features
 * Add more command
