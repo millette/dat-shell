@@ -53,8 +53,6 @@ $ npm install --global dat-shell
 ## TODO
 There's lots to do, classified here in bugs and features.
 
-> pfrazee: once you've got a good MVP, make a gif and we can tweet it up!
-
 ### Bugs
 * Improve error messages
 * Prevent cd into a file (doh)
@@ -83,6 +81,7 @@ There's lots to do, classified here in bugs and features.
 * Evaluate [vorpal][] for integration
 * Add bookmark support (compatible with beaker, hopefully)
 * Make sure it works cross-platform (posix, windows)
+* Add text browser mode (à la lynx)
 
 ### Ideas from #dat on freenode (IRC)
 * creationix: would be cool to have the ability to run scripts in dat-shell

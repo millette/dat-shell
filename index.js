@@ -137,12 +137,11 @@ class MakeRepl {
           case 'text/html':
             return this._dat.archive.readFile(resolvePath(this.cwd, args[0]), 'utf-8', (err, x) => {
               if (err) { return reject(err) }
-              resolve(
-                html2ansi(x)
-                  .split('\n')
-                  .filter((x) => x.toLowerCase().indexOf('<!doctype') === -1)
-                  .filter((x) => x.trim().length)
-              )
+              const html = x
+                .replace(/<!doctype.+?>/i, '')
+                .replace(/<\/p>/ig, '</p>\n')
+                .replace(/<\/div>/ig, '</div>\n')
+              resolve(html2ansi(html))
             })
         }
 
