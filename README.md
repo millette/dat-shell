@@ -16,7 +16,7 @@ $ npm install --global dat-shell
 ### Requirements
 You'll need node 8.9.1 (LTS) or above. I suggest using [n-install] to install the ```n``` node version manager.
 
-You'll probably need ```git``` too since we're using my (temporary) fork of glob to support hyperdrives (dat archives), and that fork is only available on github and not (yet) on npm. See <#XX> to help merge my glob fork.
+You'll probably need ```git``` too since we're using my (temporary) fork of glob to support hyperdrives (dat archives), and that fork is only available on github and not (yet) on npm. See [below][merge-glob] to help merge my glob fork.
 
 ## Usage
 ```sh
@@ -108,4 +108,5 @@ AGPL-v3 © 2017 [Robin Millette][]
 [vorpal]: <https://github.com/dthree/vorpal>
 [n-install]: <https://github.com/mklement0/n-install>
 [glob280]: <https://github.com/isaacs/node-glob/issues/280#issuecomment-348816454>
+[merge-glob]: <#merge-glob>
 [screencast]: output.gif "dat-shell screencast"
