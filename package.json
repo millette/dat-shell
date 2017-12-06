@@ -3,6 +3,12 @@
   "description": "Dat shell. Open a remote dat and explore with cd, ls, etc.",
   "version": "0.2.3",
   "license": "AGPL-3.0",
+  "repository": "millette/dat-shell",
+  "author": {
+    "name": "Robin Millette",
+    "email": "robin@millette.info",
+    "url": "http://robin.millette.info"
+  },
   "main": "index.js",
   "bin": {
     "dat-shell": "cli.js"
