@@ -7,11 +7,19 @@ const glob = require('glob')
 const miss = require('mississippi')
 const stdout = require('stdout')
 const expandTilde = require('expand-tilde')
+const mime = require('mime')
+const marked = require('marked')
+const TerminalRenderer = require('marked-terminal')
+const DownmarkStream = require('downmark-stream')
+const html2ansi = require('html-to-ansi')
 
 // core
 const repl = require('repl')
 const resolvePath = require('path').resolve
 const fs = require('fs')
+const util = require('util')
+
+marked.setOptions({ renderer: new TerminalRenderer() })
 
 const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
@@ -42,7 +50,7 @@ const notFound = (cmd) => Object.assign(new Error(`Command not found.`), { cmd }
 const writer = (str) => {
   if (typeof str === 'string') { return str + '\n' }
   if (typeof str === 'object' && str.length !== undefined) { return str.join('\n') + '\n' }
-  if (typeof str === 'object') { return JSON.stringify(str, null, '  ') + '\n' }
+  if (typeof str === 'object') { return util.inspect(str, { colors: true }) }
   return str + '\n'
 }
 
@@ -51,7 +59,7 @@ class MakeRepl {
     Object.assign(this, opts)
     if (opts.datKey) { this._datKeyProvided = opts.datKey }
 
-    const asyncs = ['ls', 'cat', 'cp']
+    const asyncs = ['ls', 'cat', 'cp', 'file', 'view']
 
     this._commands = {
       '.help': {},
@@ -61,9 +69,7 @@ class MakeRepl {
         let str
         for (r in this._commands) {
           str = r
-          if (this._commands[r].help) {
-            str += `: ${this._commands[r].help}`
-          }
+          if (this._commands[r].help) { str += `: ${this._commands[r].help}` }
           lines.push(str)
         }
         return lines
@@ -93,6 +99,64 @@ class MakeRepl {
           if (err) { return reject(err) }
           resolve(files.filter(Boolean))
         })
+      }),
+      file: (args) => new Promise((resolve, reject) => {
+        if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
+        if (!args || !args[0]) { return reject(new Error('file requires a file argument.')) }
+        const type = mime.getType(args[0])
+        if (type) { return resolve(type) }
+        reject(new Error('No mimetype detected.'))
+      }),
+      view: (args) => new Promise((resolve, reject) => {
+        if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
+        if (!args || !args[0]) { return reject(new Error('view requires a file argument.')) }
+        const type = mime.getType(args[0])
+        switch (type) {
+          case null:
+            return reject(new Error('No mimetype detected.'))
+
+          case 'application/json':
+            return this._dat.archive.readFile(resolvePath(this.cwd, args[0]), 'utf-8', (err, x) => {
+              if (err) { return reject(err) }
+              try {
+                resolve(JSON.parse(x))
+              } catch (e) {
+                reject(e)
+              }
+            })
+
+          case 'text/markdown':
+            return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), DownmarkStream(), stdout(), (err) => {
+              if (err) { return reject(err) }
+              resolve()
+            })
+
+          case 'text/plain':
+            return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
+              if (err) { return reject(err) }
+              resolve()
+            })
+
+          case 'text/html':
+            return this._dat.archive.readFile(resolvePath(this.cwd, args[0]), 'utf-8', (err, x) => {
+              if (err) { return reject(err) }
+              resolve(
+                html2ansi(x)
+                  .split('\n')
+                  .filter((x) => x.toLowerCase().indexOf('<!doctype') === -1)
+                  .filter((x) => x.trim().length)
+              )
+            })
+        }
+
+        const types = type.split('/')
+        if (types[0] === 'text') {
+          return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
+            if (err) { return reject(err) }
+            resolve()
+          })
+        }
+        reject(new Error('Unsupported file type.'))
       }),
       sl: (args) => 'Choo! Choo!',
       cd: (args) => {
@@ -124,6 +188,7 @@ class MakeRepl {
     this._commands['.help'].help = 'Internal repl commands.'
     this._commands.help.help = 'List of commands and their descriptions.'
     this._commands.ls.help = 'List files.'
+    this._commands.file.help = 'Detect mimetype.'
     this._commands.cat.help = 'View a file (concatenate).'
     this._commands.cp.help = 'Copy a file from remote dat to local filesystem.'
     this._commands.cd.help = 'Change directory.'

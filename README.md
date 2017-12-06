@@ -51,12 +51,13 @@ $ npm install --global dat-shell
 ## TODO
 There's lots to do, classified here in bugs and features.
 
+> pfrazee: once you've got a good MVP, make a gif and we can tweet it up!
+
 ### Bugs
 * Improve error messages
 * Prevent cd into a file (doh)
 
 ### Features
-* Add generic view command (text, markdown, html, etc.)
 * Add more command
 * Add tail command
 * Add tree command
