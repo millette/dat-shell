@@ -57,7 +57,6 @@ There's lots to do, classified here in bugs and features.
 
 ### Features
 * Add cp command
-* Add cat command
 * Add more command
 * Add tail command
 * Add tree command
@@ -78,6 +77,7 @@ There's lots to do, classified here in bugs and features.
 * Evaluate [shelljs][] for integration
 * Evaluate [cash][] for integration
 * Evaluate [vorpal][] for integration
+* Add bookmark support (compatible with beaker, hopefully)
 
 ### Ideas from #dat on freenode (IRC)
 * creationix: would be cool to have the ability to run scripts in dat-shell

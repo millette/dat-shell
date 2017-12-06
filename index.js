@@ -4,6 +4,8 @@
 const Dat = require('dat-node')
 const ram = require('random-access-memory')
 const glob = require('glob')
+const miss = require('mississippi')
+const stdout = require('stdout')
 
 // core
 const repl = require('repl')
@@ -47,7 +49,7 @@ class MakeRepl {
     Object.assign(this, opts)
     if (opts.datKey) { this._datKeyProvided = opts.datKey }
 
-    const asyncs = ['ls']
+    const asyncs = ['ls', 'cat']
 
     this._commands = {
       '.help': {},
@@ -64,6 +66,14 @@ class MakeRepl {
         }
         return lines
       },
+      cat: (args) => new Promise((resolve, reject) => {
+        if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
+        if (!args || !args[0]) { return reject(new Error('cat requires a file argument')) }
+        miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
+          if (err) { return reject(err) }
+          resolve()
+        })
+      }),
       ls: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         const cwd = (args && args[0] && resolvePath(this.cwd, args[0])) || this.cwd
@@ -102,6 +112,7 @@ class MakeRepl {
     this._commands['.help'].help = 'Internal repl commands.'
     this._commands.help.help = 'List of commands and their descriptions.'
     this._commands.ls.help = 'List files.'
+    this._commands.cat.help = 'View a file (concatenate).'
     this._commands.cd.help = 'Change directory.'
     this._commands.sl.help = 'Train yourself to avoid typos.'
     this._commands.pwd.help = 'Output current working directory.'
