@@ -18,6 +18,8 @@ const resolvePath = require('path').resolve
 const fs = require('fs')
 const util = require('util')
 
+const startsWith = (line, x) => !x.indexOf(line)
+
 const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
   const doG = (dat, stats, g) => {
@@ -51,7 +53,7 @@ const writer = (str) => {
   return str + '\n'
 }
 
-class MakeRepl {
+class DatRepl {
   constructor (opts) {
     Object.assign(this, opts)
     if (opts.datKey) { this._datKeyProvided = opts.datKey }
@@ -196,10 +198,30 @@ class MakeRepl {
     this._commands.version.help = 'Current dat-shell version.'
     this._commands.exit.help = 'Exit dat-shell (or CTRL-D).'
 
+    const completer = (line) => [
+      [
+        ...Object.keys(this._commands),
+        ...Object.keys(this._replServer.commands).map((x) => `.${x}`)
+      ]
+        .filter(startsWith.bind(this, line))
+        .sort(),
+      line
+    ]
+
+    /*
+    const completer = (line, cb) => cb(null, [Object.keys(this._commands).filter((x) => !x.indexOf(line)), line])
+    cb(new Error('Kaboom'))
+    * Triggers the following
+    * sDEBUG: tab completion error %j
+    * (node:19857) [DEP0028] DeprecationWarning: util.debug is deprecated. Use console.error instead.
+    * Probably fixed in 9.0.0 (check it out)
+    */
+
     const startOptions = {
+      writer,
+      completer,
       prompt: this._makePrompt(),
       ignoreUndefined: true,
-      writer,
       eval: (str, context, filename, callback) => {
         str = str.trim()
         const parts = str.split(' ') // FIXME do it as bash (quotes, etc.)
@@ -257,4 +279,4 @@ class MakeRepl {
   }
 }
 
-module.exports = MakeRepl
+module.exports = DatRepl

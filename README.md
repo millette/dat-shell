@@ -76,7 +76,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Add tail command
 * Add tree command
 * Browse versions (history)
-* Add custom command completion
+* Add autocompletion of files
 * Improve ls handling (arguments, long version, etc.)
 * Improve args quoting (*à la* bash)
 * Improve help, add long command descriptions
