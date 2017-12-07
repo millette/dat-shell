@@ -74,18 +74,17 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Add more command
 * Add tail command
 * Add tree command
-* Browse versions (history)
-* Add autocompletion of files
+* [issue#10] Browse versions (history)
+* [issue#7] Add file autocompletion
 * Improve ls handling (arguments, long version, etc.)
 * Improve args quoting (*à la* bash)
-* Improve help, add long command descriptions
 * Colors
 * Make all commands async (promises)
 * Improve user responses
 * Make prompt configurable (*à la* bash)
 * Unit tests, travis, coveralls
 * Gemnasium badge
-* Enable usage as: dat-shell KEY ls (non-interactive)
+* [issue#9] Enable usage as: dat-shell KEY ls (non-interactive)
 * Support plugins
 * Add debugging options and output
 * Evaluate [shelljs][] for integration
@@ -93,10 +92,10 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Evaluate [vorpal][] for integration
 * Add bookmark support (compatible with beaker, hopefully)
 * Make sure it works cross-platform (posix, windows)
-* Add text browser mode (à la lynx)
+* [issue#8] Add text browser mode (à la lynx)
 * Package self-contained binary with pkg
 * "Implement" [standard-readme][]
-* Handle cwd given dat://4505de...dba1/fonts/ (automatically: cd /fonts)
+* [issue#6] Handle cwd given dat://4505de...dba1/fonts/ (automatically: cd /fonts)
 
 ### Optimizations (speed or size)
 * Replace marked-terminal and update-notifier with smaller equivalents
@@ -126,5 +125,10 @@ AGPL-v3 © 2017 [Robin Millette][]
 [issue#3]: <https://github.com/millette/dat-shell/issues/3>
 [issue#4]: <https://github.com/millette/dat-shell/issues/4>
 [issue#5]: <https://github.com/millette/dat-shell/issues/5>
+[issue#6]: <https://github.com/millette/dat-shell/issues/6>
+[issue#7]: <https://github.com/millette/dat-shell/issues/7>
+[issue#8]: <https://github.com/millette/dat-shell/issues/8>
+[issue#9]: <https://github.com/millette/dat-shell/issues/9>
+[issue#10]: <https://github.com/millette/dat-shell/issues/10>
 
 [screencast]: output.gif "dat-shell screencast"
