@@ -99,7 +99,6 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 
 ### Optimizations (speed or size)
 * Replace marked-terminal and update-notifier with smaller equivalents
-* Replace mississippi with used modules (pipeline, etc.)
 
 ### Ideas from #dat on freenode (IRC)
 * creationix: would be cool to have the ability to run scripts in dat-shell

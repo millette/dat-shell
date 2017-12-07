@@ -4,7 +4,7 @@
 const Dat = require('dat-node')
 const ram = require('random-access-memory')
 const glob = require('glob')
-const miss = require('mississippi')
+const pump = require('pump')
 const stdout = require('stdout')
 const expandTilde = require('expand-tilde')
 const mime = require('mime')
@@ -78,7 +78,7 @@ class DatRepl {
         if (!args || args.length !== 2) { return reject(new Error('cp requires two file arguments.')) }
         const inFile = this._dat.archive.createReadStream(resolvePath(this.cwd, args[0]))
         const outFile = fs.createWriteStream(expandTilde(args[1]))
-        miss.pipe(inFile, outFile, (err) => {
+        pump(inFile, outFile, (err) => {
           if (err) { return reject(err) }
           resolve()
         })
@@ -86,7 +86,7 @@ class DatRepl {
       cat: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         if (!args || !args[0]) { return reject(new Error('cat requires a file argument.')) }
-        miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
+        pump(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
           if (err) { return reject(err) }
           resolve()
         })
@@ -125,13 +125,13 @@ class DatRepl {
             })
 
           case 'text/markdown':
-            return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), DownmarkStream({ renderer: new TerminalRenderer() }), stdout(), (err) => {
+            return pump(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), DownmarkStream({ renderer: new TerminalRenderer() }), stdout(), (err) => {
               if (err) { return reject(err) }
               resolve()
             })
 
           case 'text/plain':
-            return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
+            return pump(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
               if (err) { return reject(err) }
               resolve()
             })
@@ -149,7 +149,7 @@ class DatRepl {
 
         const types = type.split('/')
         if (types[0] === 'text') {
-          return miss.pipe(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
+          return pump(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
             if (err) { return reject(err) }
             resolve()
           })
