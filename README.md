@@ -64,12 +64,11 @@ I should probably move most of the items below to GitHub issues and establish a 
 There's an [issue on glob to allow other fs implementations][glob280]. This allows glob to work on dat archives (and the hyperdrive beneath).
 
 ### Bugs
-* Improve error messages
-* Prevent cd into a file (doh)
-* Copy to directory (currently, a destination filename is required)
-* Replace current dat for this project with a new one (current has way to many files in its history)
-* Improve screencast (demo), see <https://twitter.com/pfrazee/status/938448616854876160>
-* dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works
+* [issue#1] Improve error messages
+* [issue#2] Prevent cd into a file (doh)
+* [issue#3] Copy to directory (currently, a destination filename is required)
+* [issue#4] Improve screencast (demo), see <https://twitter.com/pfrazee/status/938448616854876160>
+* [issue#5] dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works
 
 ### Features
 * Add more command
@@ -122,5 +121,10 @@ AGPL-v3 © 2017 [Robin Millette][]
 [merge-glob]: <#merge-glob>
 [standard-readme]: <https://github.com/RichardLitt/standard-readme>
 [standardjs]: <https://standardjs.com/>
+[issue#1]: <https://github.com/millette/dat-shell/issues/1>
+[issue#2]: <https://github.com/millette/dat-shell/issues/2>
+[issue#3]: <https://github.com/millette/dat-shell/issues/3>
+[issue#4]: <https://github.com/millette/dat-shell/issues/4>
+[issue#5]: <https://github.com/millette/dat-shell/issues/5>
 
 [screencast]: output.gif "dat-shell screencast"
