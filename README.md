@@ -96,6 +96,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Package self-contained binary with pkg
 * "Implement" [standard-readme][]
 * [issue#6] Handle cwd given dat://4505de...dba1/fonts/ (automatically: cd /fonts)
+* Add status bar (show when files are updated, version, etc.)
 
 ### Optimizations (speed or size)
 * Replace marked-terminal and update-notifier with smaller equivalents
