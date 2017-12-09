@@ -37,6 +37,39 @@ $ dat-shell dat://dat-shell-millette.hashbase.io/
 
 You might wonder about <dat://dat-shell-millette.hashbase.io/> but it's perfectly valid since the hostname maps to the ```ae8c...573a``` key through https discovery.
 
+### Commands
+* help: List of commands and their descriptions.
+* .help: Internal repl commands.
+* ln: Pseudo symbolic link (mkfifo).
+* cp: Copy a file from remote dat to local filesystem.
+* cat: View a file (concatenate).
+* ls: List files.
+* file: Detect mimetype.
+* view: Generic view command (text, markdown, html, etc.).
+* sl: Train yourself to avoid typos.
+* cd: Change directory.
+* pwd: Output current working directory.
+* dat: dat -c to close; dat <KEY> to open; dat to output current key.
+* state: Output current state.
+* version: Current dat-shell version.
+* exit: Exit dat-shell (or CTRL-D).
+
+#### ln
+ln is a bit weird, not sure how useful it's going to be. As it's currently implemented, ln creates a fifo, writes the specified remote file (in dat) to the fifo and waits for the user to read the fifo before closing and removing it.
+
+For instance, inside dat-shell, you can do:
+
+```
+ln readme.md ~/tmp-readme.md # ~/tmp-readme.md will be overwritten with our temporary fifo
+```
+
+And in another terminal (bash, etc.):
+```
+cat ~/tmp-readme.md # or tail, cp, etc.
+```
+
+You can't currently ```ln``` a video file and play it with vlc or mplayer unfortunately.
+
 ## Upgrading
 The cli now uses [update-notifier][] to let the user know about updates to this program.
 
@@ -71,7 +104,6 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#5] dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works
 
 ### Features
-* Add ln command (implemented with [mkfifo][] so it's not really a symlink
 * Add more command
 * Add tail command
 * Add tree command
