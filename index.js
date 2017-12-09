@@ -11,6 +11,7 @@ const mime = require('mime')
 const TerminalRenderer = require('marked-terminal')
 const DownmarkStream = require('downmark-stream')
 const html2ansi = require('html-to-ansi')
+const { mkfifo } = require('mkfifo')
 
 // core
 const repl = require('repl')
@@ -58,7 +59,7 @@ class DatRepl {
     Object.assign(this, opts)
     if (opts.datKey) { this._datKeyProvided = opts.datKey }
 
-    const asyncs = ['ls', 'cat', 'cp', 'file', 'view']
+    const asyncs = ['ls', 'cat', 'cp', 'file', 'view', 'ln']
 
     this._commands = {
       '.help': {},
@@ -73,31 +74,40 @@ class DatRepl {
         }
         return lines
       },
+      ln: (args) => new Promise((resolve, reject) => {
+        if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
+        if (!args || args.length !== 2) { return reject(new Error('ln requires two file arguments.')) }
+        const fn = expandTilde(args[1])
+        mkfifo(fn, parseInt(644, 8), (err) => {
+          if (err && err.code !== 'EEXIST') { return reject(err) }
+          const inFile = this._dat.archive.createReadStream(resolvePath(this.cwd, args[0]))
+          const outFile = fs.createWriteStream(fn)
+          console.log(`${fn} is waiting to be read...`)
+          pump(inFile, outFile, (err) => {
+            fs.unlink(fn, (e2) => {
+              if (err) { return reject(err) }
+              if (e2) { return reject(e2) }
+              resolve()
+            })
+          })
+        })
+      }),
       cp: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         if (!args || args.length !== 2) { return reject(new Error('cp requires two file arguments.')) }
         const inFile = this._dat.archive.createReadStream(resolvePath(this.cwd, args[0]))
         const outFile = fs.createWriteStream(expandTilde(args[1]))
-        pump(inFile, outFile, (err) => {
-          if (err) { return reject(err) }
-          resolve()
-        })
+        pump(inFile, outFile, (err) => err ? reject(err) : resolve())
       }),
       cat: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         if (!args || !args[0]) { return reject(new Error('cat requires a file argument.')) }
-        pump(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => {
-          if (err) { return reject(err) }
-          resolve()
-        })
+        pump(this._dat.archive.createReadStream(resolvePath(this.cwd, args[0])), stdout(), (err) => err ? reject(err) : resolve())
       }),
       ls: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
         const cwd = (args && args[0] && resolvePath(this.cwd, args[0])) || this.cwd
-        glob('*', { mark: true, cwd, fs: this._dat.archive }, (err, files) => {
-          if (err) { return reject(err) }
-          resolve(files.filter(Boolean))
-        })
+        glob('*', { mark: true, cwd, fs: this._dat.archive }, (err, files) => err ? reject(err) : resolve(files.filter(Boolean)))
       }),
       file: (args) => new Promise((resolve, reject) => {
         if (!this.datKey || !this._dat || !this._dat.archive) { return reject(new Error('Dat not ready.')) }
@@ -187,6 +197,7 @@ class DatRepl {
     this._commands.help.help = 'List of commands and their descriptions.'
     this._commands.ls.help = 'List files.'
     this._commands.file.help = 'Detect mimetype.'
+    this._commands.ln.help = 'Pseudo symbolic link (mkfifo).'
     this._commands.cat.help = 'View a file (concatenate).'
     this._commands.view.help = 'Generic view command (text, markdown, html, etc.).'
     this._commands.cp.help = 'Copy a file from remote dat to local filesystem.'
