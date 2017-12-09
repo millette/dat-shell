@@ -2037,6 +2037,12 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+mkfifo@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/mkfifo/-/mkfifo-1.2.5.tgz#9e97b0a4ea737e7f040b3aaf40df9d3f4b92ea8d"
+  dependencies:
+    nan "2.3"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -2067,6 +2073,10 @@ mute-stream@0.0.5:
 mutexify@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mutexify/-/mutexify-1.2.0.tgz#45597975a2b035f56dcf61ff15cc8d73c28e7639"
+
+nan@2.3:
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.3.5.tgz#822a0dc266290ce4cd3a12282ca3e7e364668a08"
 
 nan@^2.4.0, nan@^2.5.1:
   version "2.8.0"
