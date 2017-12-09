@@ -71,6 +71,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#5] dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works
 
 ### Features
+* Add ln command (implemented with [mkfifo][] so it's not really a symlink
 * Add more command
 * Add tail command
 * Add tree command
@@ -90,6 +91,9 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Evaluate [shelljs][] for integration
 * Evaluate [cash][] for integration
 * Evaluate [vorpal][] for integration
+* Evaluate [nsh][] for integration
+* Evaluate [coreutils][] for integration
+* Evaluate [bashful][] for integration
 * Add bookmark support (compatible with beaker, hopefully)
 * Make sure it works cross-platform (posix, windows)
 * [issue#8] Add text browser mode (à la lynx)
@@ -106,6 +110,19 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * creationix: pluggable vms for running scripts, scripts could list dependencies via dat urls, maybe even load native vm code from dats
 * scriptjs: Would be nice if the licence for dat-shell was aligned with the dat ecosystem MIT please
 
+## Related projects
+* [Reimagining the browser as a network OS][] by Paul Frazee
+
+### Maybe related
+See [features] above.
+
+* [shelljs][]
+* [cash][]
+* [vorpal][]
+* [nsh][]
+* [coreutils][]
+* [bashful][]
+
 ## License
 AGPL-v3 © 2017 [Robin Millette][]
 
@@ -118,8 +135,15 @@ AGPL-v3 © 2017 [Robin Millette][]
 [n-install]: <https://github.com/mklement0/n-install>
 [glob280]: <https://github.com/isaacs/node-glob/issues/280#issuecomment-348816454>
 [merge-glob]: <#merge-glob>
+[features]: <#features>
 [standard-readme]: <https://github.com/RichardLitt/standard-readme>
 [standardjs]: <https://standardjs.com/>
+[Reimagining the browser as a network OS]: <https://pfrazee.hashbase.io/blog/reimagining-the-browser-as-a-network-os>
+[mkfifo]: <https://github.com/avz/node-mkfifo>
+[nsh]: <https://github.com/piranna/nsh>
+[coreutils]: <https://github.com/piranna/coreutils.js>
+[bashful]: <https://github.com/substack/bashful>
+
 [issue#1]: <https://github.com/millette/dat-shell/issues/1>
 [issue#2]: <https://github.com/millette/dat-shell/issues/2>
 [issue#3]: <https://github.com/millette/dat-shell/issues/3>
