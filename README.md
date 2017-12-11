@@ -52,7 +52,7 @@ You might wonder about <dat://dat-shell-millette.hashbase.io/> but it's perfectl
 * dat: dat -c to close; dat <KEY> to open; dat to output current key.
 * state: Output current state.
 * version: Current dat-shell version.
-* exit: Exit dat-shell (or CTRL-D).
+* exit or quit: Exit dat-shell (or CTRL-D).
 
 #### ln
 ln is a bit weird, not sure how useful it's going to be. As it's currently implemented, ln creates a fifo, writes the specified remote file (in dat) to the fifo and waits for the user to read the fifo before closing and removing it.
@@ -101,7 +101,8 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#2] Prevent cd into a file (doh)
 * [issue#3] Copy to directory (currently, a destination filename is required)
 * [issue#4] Improve screencast (demo), see <https://twitter.com/pfrazee/status/938448616854876160>
-* [issue#5] dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works
+* [issue#5] dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works - see <https://github.com/joehand/dat-link-resolve/pull/4>
+* Ctrl-q doesn't always quit
 
 ### Features
 * Add more command
