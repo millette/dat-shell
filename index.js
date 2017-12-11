@@ -190,6 +190,7 @@ class DatRepl {
         return lines
       },
       version: (args) => [`${this.pkg.name} v${this.pkg.version}`, `${this.pkg.description}`],
+      quit: (args) => process.exit((args && parseInt(args[0], 10)) || 0),
       exit: (args) => process.exit((args && parseInt(args[0], 10)) || 0)
     }
 
@@ -208,6 +209,7 @@ class DatRepl {
     this._commands.state.help = 'Output current state.'
     this._commands.version.help = 'Current dat-shell version.'
     this._commands.exit.help = 'Exit dat-shell (or CTRL-D).'
+    this._commands.quit.help = 'Exit dat-shell (or CTRL-D).'
 
     const completer = (line) => [
       [
