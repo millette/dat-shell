@@ -530,8 +530,8 @@ dat-dns@^1.1.0:
     debug "^2.6.1"
 
 dat-encoding@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/dat-encoding/-/dat-encoding-5.0.0.tgz#990686651ac1e573bd550d2f3c8ebbdf12077914"
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/dat-encoding/-/dat-encoding-5.0.1.tgz#8d835c67bc3a0df831fc10eaee2e2a1ffe6a4871"
   dependencies:
     safe-buffer "^5.0.1"
 
@@ -543,8 +543,8 @@ dat-ignore@^2.0.0:
     xtend "^4.0.1"
 
 dat-link-resolve@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/dat-link-resolve/-/dat-link-resolve-2.0.0.tgz#0c4fa48a4fc0821ebccaba992521117b02105c5d"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/dat-link-resolve/-/dat-link-resolve-2.1.0.tgz#ed8b362a950d8872b45ad8aa9194eeb522028ea5"
   dependencies:
     dat-dns "^1.1.0"
     dat-encoding "^5.0.0"

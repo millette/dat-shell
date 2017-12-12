@@ -101,15 +101,15 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#2] Prevent cd into a file (doh)
 * [issue#3] Copy to directory (currently, a destination filename is required)
 * [issue#4] Improve screencast (demo), see <https://twitter.com/pfrazee/status/938448616854876160>
-* [issue#5] dat-shell google-fonts-kewitz.hashbase.io/fonts/ fails (with dat:// or https:// or not) but dat://4505de...dba1/fonts/ works - see <https://github.com/joehand/dat-link-resolve/pull/4>
-* Ctrl-q doesn't always quit
+* Ctrl-d doesn't always quit
 
 ### Features
+* [issue#6] Handle cwd given dat://4505de...dba1/fonts/ (automatically: cd /fonts)
+* [issue#7] Add file autocompletion
+* [issue#10] Browse versions (history)
 * Add more command
 * Add tail command
 * Add tree command
-* [issue#10] Browse versions (history)
-* [issue#7] Add file autocompletion
 * Improve ls handling (arguments, long version, etc.)
 * Improve args quoting (*à la* bash)
 * Colors
@@ -132,7 +132,6 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#8] Add text browser mode (à la lynx)
 * Package self-contained binary with pkg
 * "Implement" [standard-readme][]
-* [issue#6] Handle cwd given dat://4505de...dba1/fonts/ (automatically: cd /fonts)
 * Add status bar (show when files are updated, version, etc.)
 
 ### Optimizations (speed or size)
