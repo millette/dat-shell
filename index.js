@@ -199,6 +199,7 @@ class DatRepl {
         if (this._datKeyProvided) { lines.push(`datKeyProvided: ${this._datKeyProvided}`) }
         if (this.datKey) { lines.push(`datKey: ${this.datKey}`) }
         if (this._version) { lines.push(`version: ${this._version}`) }
+        if (this._latestVersion) { lines.push(`latest version: ${this._latestVersion}`) }
         return lines
       },
       version: (args) => [`${this.pkg.name} v${this.pkg.version}`, `${this.pkg.description}`],
@@ -291,10 +292,23 @@ class DatRepl {
         openDat(key)
           .then((dat) => {
             this._dat = dat
+            this._latestVersion = dat.archive.version
             this._datKey = dat.key.toString('hex')
             const p = parseDatUrl(key, this.datKey)
             this.cwd = (p && p.path) || '/'
-            if (p && p.version) { this._version = p.version }
+            if (p && p.version) {
+              this._version = p.version
+              if (p.version !== dat.archive.version) {
+                const na = dat.archive.checkout(p.version)
+                if (na) {
+                  this._dat.archive = na
+                } else {
+                  this._version = dat.archive.version
+                }
+              }
+            } else {
+              this._version = dat.archive.version
+            }
             if (this._datKey !== key) { this._datKeyProvided = key }
           })
       }
