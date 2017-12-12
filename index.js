@@ -18,8 +18,19 @@ const repl = require('repl')
 const resolvePath = require('path').resolve
 const fs = require('fs')
 const util = require('util')
+const parseUrl = require('url').parse
 
 const startsWith = (line, x) => !x.indexOf(line)
+
+const parseDatUrl = (datUrl, key) => {
+  const ret = { key }
+  const urlLink = (datUrl.indexOf('http') && datUrl.indexOf('dat:')) ? ('http://' + datUrl) : datUrl
+  const p = parseUrl(urlLink)
+  if (p.path) { ret.path = p.path }
+  const m = datUrl.match(/\+([0-9]+)/)
+  if (m && m[1]) { ret.version = parseInt(m[1], 10) }
+  return ret
+}
 
 const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
@@ -187,6 +198,7 @@ class DatRepl {
         if (this._previousCwd) { lines.push(`previousCwd: ${this._previousCwd}`) }
         if (this._datKeyProvided) { lines.push(`datKeyProvided: ${this._datKeyProvided}`) }
         if (this.datKey) { lines.push(`datKey: ${this.datKey}`) }
+        if (this._version) { lines.push(`version: ${this._version}`) }
         return lines
       },
       version: (args) => [`${this.pkg.name} v${this.pkg.version}`, `${this.pkg.description}`],
@@ -280,8 +292,10 @@ class DatRepl {
           .then((dat) => {
             this._dat = dat
             this._datKey = dat.key.toString('hex')
+            const p = parseDatUrl(key, this.datKey)
+            this.cwd = (p && p.path) || '/'
+            if (p && p.version) { this._version = p.version }
             if (this._datKey !== key) { this._datKeyProvided = key }
-            this.cwd = '/'
           })
       }
     } else if (this._datKey && this._dat && this._dat.close) {

@@ -104,7 +104,6 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Ctrl-d doesn't always quit
 
 ### Features
-* [issue#6] Handle cwd given dat://4505de...dba1/fonts/ (automatically: cd /fonts)
 * [issue#7] Add file autocompletion
 * [issue#10] Browse versions (history)
 * Add more command
