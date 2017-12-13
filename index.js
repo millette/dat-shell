@@ -248,7 +248,12 @@ class DatRepl {
       completer,
       prompt: this._makePrompt(),
       ignoreUndefined: true,
-      eval: (str, context, filename, callback) => {
+      eval: (str, context, filename, cb) => {
+        const callback = (err, ok) => {
+          this.title = `${this._datKeyProvided} (${this.datKey}) ${this._version} ${this.cwd}`
+          cb(err, ok)
+        }
+
         str = str.trim()
         const parts = str.split(' ') // FIXME do it as bash (quotes, etc.)
         const cmd = parts[0]
@@ -267,9 +272,15 @@ class DatRepl {
     console.log(this._commands.state().join('\n'))
     console.log(this._commands.help().join('\n'))
     this._replServer = repl.start(startOptions)
+    // console.log('replServer:', Object.keys(this._replServer))
   }
 
   _makePrompt () { return `dat-shell ${this.cwd} $ ` }
+
+  set title (str) {
+    if (!this._replServer) { return }
+    this._replServer.outputStream.write(`\u001b]0;${str}\u0007`)
+  }
 
   get replServer () { return this._replServer }
 
