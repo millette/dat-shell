@@ -106,7 +106,11 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 
 ### Features
 * [issue#7] Add file autocompletion
+* [issue#8] Add text browser mode (à la lynx)
+* [issue#9] Enable usage as: dat-shell KEY ls (non-interactive)
 * [issue#10] Browse versions (history)
+* [issue#12] Add status bar (show when files are updated, version, etc.)
+* [issue#13] Unit tests, travis, coveralls
 * Add more command
 * Add tail command
 * Add tree command
@@ -116,9 +120,8 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Make all commands async (promises)
 * Improve user responses
 * Make prompt configurable (*à la* bash)
-* Unit tests, travis, coveralls
+* Make statusbar configurable
 * Gemnasium badge
-* [issue#9] Enable usage as: dat-shell KEY ls (non-interactive)
 * Support plugins
 * Add debugging options and output
 * Evaluate [shelljs][] for integration
@@ -129,10 +132,8 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * Evaluate [bashful][] for integration
 * Add bookmark support (compatible with beaker, hopefully)
 * Make sure it works cross-platform (posix, windows)
-* [issue#8] Add text browser mode (à la lynx)
 * Package self-contained binary with pkg
 * "Implement" [standard-readme][]
-* [issue#12] Add status bar (show when files are updated, version, etc.)
 
 ### Optimizations (speed or size)
 * Replace marked-terminal and update-notifier with smaller equivalents
