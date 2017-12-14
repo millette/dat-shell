@@ -102,6 +102,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#3] Copy to directory (currently, a destination filename is required)
 * [issue#4] Improve screencast (demo), see <https://twitter.com/pfrazee/status/938448616854876160>
 * Ctrl-d doesn't always quit
+* [issue#11] ln should work as expected (for mplayer, etc.)
 
 ### Features
 * [issue#7] Add file autocompletion
@@ -131,7 +132,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#8] Add text browser mode (à la lynx)
 * Package self-contained binary with pkg
 * "Implement" [standard-readme][]
-* Add status bar (show when files are updated, version, etc.)
+* [issue#12] Add status bar (show when files are updated, version, etc.)
 
 ### Optimizations (speed or size)
 * Replace marked-terminal and update-notifier with smaller equivalents
@@ -185,5 +186,7 @@ AGPL-v3 © 2017 [Robin Millette][]
 [issue#8]: <https://github.com/millette/dat-shell/issues/8>
 [issue#9]: <https://github.com/millette/dat-shell/issues/9>
 [issue#10]: <https://github.com/millette/dat-shell/issues/10>
+[issue#11]: <https://github.com/millette/dat-shell/issues/11>
+[issue#12]: <https://github.com/millette/dat-shell/issues/12>
 
 [screencast]: output.gif "dat-shell screencast"
