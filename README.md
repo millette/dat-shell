@@ -106,16 +106,16 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 
 ### Features
 * [issue#7] Add file autocompletion
-* [issue#8] Add text browser mode (à la lynx)
+* [issue#8] Add text browser mode (*à la* lynx)
 * [issue#9] Enable usage as: dat-shell KEY ls (non-interactive)
 * [issue#10] Browse versions (history)
 * [issue#12] Add status bar (show when files are updated, version, etc.)
 * [issue#13] Unit tests, travis, coveralls
+* [issue#15] Improve args quoting (*à la* bash)
 * Add more command
 * Add tail command
 * Add tree command
 * Improve ls handling (arguments, long version, etc.)
-* Improve args quoting (*à la* bash)
 * Colors
 * Make all commands async (promises)
 * Improve user responses
@@ -189,5 +189,7 @@ AGPL-v3 © 2017 [Robin Millette][]
 [issue#10]: <https://github.com/millette/dat-shell/issues/10>
 [issue#11]: <https://github.com/millette/dat-shell/issues/11>
 [issue#12]: <https://github.com/millette/dat-shell/issues/12>
+[issue#13]: <https://github.com/millette/dat-shell/issues/13>
+[issue#15]: <https://github.com/millette/dat-shell/issues/15>
 
 [screencast]: output.gif "dat-shell screencast"
