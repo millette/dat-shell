@@ -2,6 +2,7 @@
 
 // npm
 const Dat = require('dat-node')
+const dlr = require('dat-link-resolve')
 const ram = require('random-access-memory')
 const glob = require('glob')
 const pump = require('pump')
@@ -18,19 +19,8 @@ const repl = require('repl')
 const resolvePath = require('path').resolve
 const fs = require('fs')
 const util = require('util')
-const parseUrl = require('url').parse
 
 const startsWith = (line, x) => !x.indexOf(line)
-
-const parseDatUrl = (datUrl, key) => {
-  const ret = { key }
-  const urlLink = (datUrl.indexOf('http') && datUrl.indexOf('dat:')) ? ('http://' + datUrl) : datUrl
-  const p = parseUrl(urlLink)
-  if (p.path) { ret.path = p.path }
-  const m = datUrl.match(/\+([0-9]+)/)
-  if (m && m[1]) { ret.version = parseInt(m[1], 10) }
-  return ret
-}
 
 const openDat = (key) => new Promise((resolve, reject) => {
   let tooBad
@@ -41,17 +31,22 @@ const openDat = (key) => new Promise((resolve, reject) => {
     resolve(dat)
   }
 
-  Dat(ram, { sparse: true, key }, (err, dat) => {
-    if (err) { return reject(err) }
-    dat.joinNetwork()
-    const stats = dat.trackStats()
-    stats.once('update', doG.bind(null, dat, stats))
+  dlr(key, true, (errDlr, resp) => {
+    if (errDlr) { return reject(errDlr) }
 
-    dat.network.once('listening', () => {
-      tooBad = setTimeout(() => {
-        dat.leaveNetwork() // preferable to dat.close() in this specific case
-        reject(new Error('Timeout.'))
-      }, 10000)
+    Dat(ram, { sparse: true, key: resp.key }, (err, dat) => {
+      if (err) { return reject(err) }
+      dat.joinNetwork()
+      const stats = dat.trackStats()
+      dat.shell = resp
+      stats.once('update', doG.bind(null, dat, stats))
+
+      dat.network.once('listening', () => {
+        tooBad = setTimeout(() => {
+          dat.leaveNetwork() // preferable to dat.close() in this specific case
+          reject(new Error('Timeout.'))
+        }, 10000)
+      })
     })
   })
 })
@@ -305,12 +300,11 @@ class DatRepl {
             this._dat = dat
             this._latestVersion = dat.archive.version
             this._datKey = dat.key.toString('hex')
-            const p = parseDatUrl(key, this.datKey)
-            this.cwd = (p && p.path) || '/'
-            if (p && p.version) {
-              this._version = p.version
-              if (p.version !== dat.archive.version) {
-                const na = dat.archive.checkout(p.version)
+            this.cwd = (dat.shell.path) || '/'
+            if (dat.shell.version) {
+              this._version = dat.shell.version
+              if (dat.shell.version !== dat.archive.version) {
+                const na = dat.archive.checkout(dat.shell.version)
                 if (na) {
                   this._dat.archive = na
                 } else {
