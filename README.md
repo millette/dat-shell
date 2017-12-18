@@ -101,7 +101,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#2] Prevent cd into a file (doh)
 * [issue#3] Copy to directory (currently, a destination filename is required)
 * [issue#4] Improve screencast (demo), see <https://twitter.com/pfrazee/status/938448616854876160>
-* Ctrl-d doesn't always quit
+* [issue#16] Ctrl-D doesn't always quit
 * [issue#11] ln should work as expected (for mplayer, etc.)
 
 ### Features
@@ -111,6 +111,7 @@ There's an [issue on glob to allow other fs implementations][glob280]. This allo
 * [issue#10] Browse versions (history)
 * [issue#12] Add status bar (show when files are updated, version, etc.)
 * [issue#13] Unit tests, travis, coveralls
+* [issue#14] Enumerate hosts
 * [issue#15] Improve args quoting (*à la* bash)
 * Add more command
 * Add tail command
@@ -190,6 +191,8 @@ AGPL-v3 © 2017 [Robin Millette][]
 [issue#11]: <https://github.com/millette/dat-shell/issues/11>
 [issue#12]: <https://github.com/millette/dat-shell/issues/12>
 [issue#13]: <https://github.com/millette/dat-shell/issues/13>
+[issue#14]: <https://github.com/millette/dat-shell/issues/14>
 [issue#15]: <https://github.com/millette/dat-shell/issues/15>
+[issue#16]: <https://github.com/millette/dat-shell/issues/16>
 
 [screencast]: output.gif "dat-shell screencast"
