@@ -34,7 +34,7 @@
     "glob": "millette/node-glob#opt-fs",
     "html-to-ansi": "^1.0.1",
     "marked-terminal": "^2.0.0",
-    "mime": "^2.0.3",
+    "mime": "^2.2.0",
     "mkfifo": "^1.2.5",
     "pump": "^2.0.0",
     "random-access-memory": "^2.4.0",
@@ -42,7 +42,7 @@
     "update-notifier": "^2.3.0"
   },
   "devDependencies": {
-    "dependency-check": "^2.9.1",
+    "dependency-check": "^2.9.2",
     "standard": "^10.0.3"
   }
 }

@@ -320,9 +320,11 @@ builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
-builtins@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
+builtins@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/builtins/-/builtins-2.0.0.tgz#018999641e11252188652dbb2db01ad386fcdc46"
+  dependencies:
+    semver "^5.4.1"
 
 bulk-write-stream@^1.1.3:
   version "1.1.3"
@@ -659,17 +661,17 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
 
-dependency-check@^2.9.1:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/dependency-check/-/dependency-check-2.9.1.tgz#228bdba768e3bf819a2a68c36f3f6a773c426ebf"
+dependency-check@^2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/dependency-check/-/dependency-check-2.9.2.tgz#537688db4a2c529c49f183cc298fb4d17d1ef433"
   dependencies:
     async "^2.1.4"
-    builtins "^1.0.0"
+    builtins "^2.0.0"
     debug "^2.2.0"
     detective "^4.0.0"
     is-relative "^0.2.1"
     minimist "^1.2.0"
-    read-package-json "^2.0.4"
+    read-package-json "2.0.10"
     resolve "^1.1.7"
 
 detective@^4.0.0:
@@ -1763,6 +1765,10 @@ iterators@~0.1.0:
   dependencies:
     ap "~0.1.0"
 
+jju@^1.1.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/jju/-/jju-1.3.0.tgz#dadd9ef01924bc728b03f2f7979bdbd62f7a2aaa"
+
 js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
@@ -1778,9 +1784,11 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
 
-json-parse-better-errors@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.1.tgz#50183cd1b2d25275de069e9e71b467ac9eab973a"
+json-parse-helpfulerror@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/json-parse-helpfulerror/-/json-parse-helpfulerror-1.0.3.tgz#13f14ce02eed4e981297b64eb9e3b932e2dd13dc"
+  dependencies:
+    jju "^1.1.0"
 
 json-schema-traverse@^0.3.0:
   version "0.3.1"
@@ -2000,9 +2008,9 @@ mime@^1.3.4:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
 
-mime@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.0.3.tgz#4353337854747c48ea498330dc034f9f4bbbcc0b"
+mime@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.2.0.tgz#161e541965551d3b549fa1114391e3a3d55b923b"
 
 min-document@^2.19.0:
   version "2.19.0"
@@ -2450,14 +2458,13 @@ rc@^1.0.1, rc@^1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-read-package-json@^2.0.4:
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/read-package-json/-/read-package-json-2.0.12.tgz#68ea45f98b3741cb6e10ae3bbd42a605026a6951"
+read-package-json@2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/read-package-json/-/read-package-json-2.0.10.tgz#dc0229f6dde6b4b705b39e25b2d970ebe95685ae"
   dependencies:
     glob "^7.1.1"
-    json-parse-better-errors "^1.0.0"
+    json-parse-helpfulerror "^1.0.2"
     normalize-package-data "^2.0.0"
-    slash "^1.0.0"
   optionalDependencies:
     graceful-fs "^4.1.2"
 
@@ -2633,7 +2640,7 @@ semver-diff@^2.0.0:
   dependencies:
     semver "^5.0.3"
 
-"semver@2 || 3 || 4 || 5", semver@^5.0.3, semver@^5.1.0:
+"semver@2 || 3 || 4 || 5", semver@^5.0.3, semver@^5.1.0, semver@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
@@ -2684,10 +2691,6 @@ siphash24@^1.0.1:
   resolved "https://registry.yarnpkg.com/siphash24/-/siphash24-1.1.0.tgz#24d3c812d164f1b34689ddcd333b6920f1efb256"
   dependencies:
     nanoassert "^1.0.0"
-
-slash@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
 slice-ansi@0.0.4:
   version "0.0.4"
