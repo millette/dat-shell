@@ -1,5 +1,6 @@
 # dat-shell
-[![Standard JS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)][standardjs]
+[![Standard JS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)][![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmillette%2Fdat-shell.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmillette%2Fdat-shell?ref=badge_shield)
+[standardjs]
 [![npm](https://img.shields.io/npm/v/dat-shell.svg)](https://www.npmjs.com/package/dat-shell)
 [![Build Status](https://travis-ci.org/millette/dat-shell.svg?branch=master)](https://travis-ci.org/millette/dat-shell)
 [![Coverage Status](https://coveralls.io/repos/github/millette/dat-shell/badge.svg?branch=master)](https://coveralls.io/github/millette/dat-shell?branch=master)
@@ -196,3 +197,6 @@ AGPL-v3 © 2017 [Robin Millette][]
 [issue#16]: <https://github.com/millette/dat-shell/issues/16>
 
 [screencast]: output.gif "dat-shell screencast"
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmillette%2Fdat-shell.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmillette%2Fdat-shell?ref=badge_large)
