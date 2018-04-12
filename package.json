@@ -27,7 +27,7 @@
     "deps": "standard && dependency-check . && dependency-check . --unused --no-dev"
   },
   "dependencies": {
-    "dat-link-resolve": "^2.1.0",
+    "dat-link-resolve": "millette/dat-link-resolve#verbose-mode",
     "dat-node": "^3.5.6",
     "downmark-stream": "^1.0.0",
     "expand-tilde": "^2.0.2",

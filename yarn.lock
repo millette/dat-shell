@@ -578,9 +578,9 @@ dat-ignore@^2.0.0:
     anymatch "^1.3.0"
     xtend "^4.0.1"
 
-dat-link-resolve@^2.0.0, dat-link-resolve@^2.1.0:
+dat-link-resolve@^2.0.0, dat-link-resolve@millette/dat-link-resolve#verbose-mode:
   version "2.1.0"
-  resolved "https://registry.yarnpkg.com/dat-link-resolve/-/dat-link-resolve-2.1.0.tgz#ed8b362a950d8872b45ad8aa9194eeb522028ea5"
+  resolved "https://codeload.github.com/millette/dat-link-resolve/tar.gz/f00324b1e5b22af738a4f9d24e0c4a4243cd0f71"
   dependencies:
     dat-dns "^1.1.0"
     dat-encoding "^5.0.0"
