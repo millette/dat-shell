@@ -45,7 +45,7 @@ const openDat = (key) => new Promise((resolve, reject) => {
         tooBad = setTimeout(() => {
           dat.leaveNetwork() // preferable to dat.close() in this specific case
           reject(new Error('Timeout.'))
-        }, 10000)
+        }, 60000)
       })
     })
   })
