@@ -2024,9 +2024,9 @@ mirror-folder@^2.1.0:
   dependencies:
     minimist "0.0.8"
 
-mkfifo@avz/node-mkfifo#82490ffea38b32fad97c42ede1e982fd3672af47:
+mkfifo@millette/node-mkfifo#upgrade-deps:
   version "1.2.5"
-  resolved "https://codeload.github.com/avz/node-mkfifo/tar.gz/82490ffea38b32fad97c42ede1e982fd3672af47"
+  resolved "https://codeload.github.com/millette/node-mkfifo/tar.gz/5684cc9c6d8432124162a1811712c3e34769926c"
   dependencies:
     nan "^2.10.0"
     node-gyp "^3.6.2"
