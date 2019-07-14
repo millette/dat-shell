@@ -280,6 +280,7 @@ class DatRepl {
   get replServer () { return this._replServer }
 
   get cwd () { return this._cwd || '/' }
+
   set cwd (d) {
     if (!this._dat) { return }
     const lastCwd = this.cwd
@@ -291,6 +292,7 @@ class DatRepl {
   }
 
   get datKey () { return this._datKey }
+
   set datKey (key) {
     if (key) {
       if (this._datKey !== key) {
