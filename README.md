@@ -6,6 +6,10 @@
 [![Dependency Status](https://gemnasium.com/badges/github.com/millette/dat-shell.svg)](https://gemnasium.com/github.com/millette/dat-shell)
 > Dat shell. Open a remote dat and explore with cd, ls, etc.
 
+## DEPRECATED
+
+Note that `dat-shell` hasn't been updated in a few years. Hoping to get back to it in 2020.
+
 dat-shell is part of the [dat][] Peer-to-Peer universe. It's useful to explore remote dats by their key without having to download them. Think of it as bash for dats, letting you ```cd```, ```ls``` and ```cp``` at will.
 
 ![dat-shell screencast][screencast]
